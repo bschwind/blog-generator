@@ -34,14 +34,27 @@ articleDirs = articleDirs.filter(function (articleDir) {
 articleDirs.sort();
 
 articleDirs.forEach(function (articleDir) {
-    console.log(articleDir);
-
     var markdownPath = [rootDir, articleDir, "article.txt"].join(path.sep);
     var markdownSource = fs.readFileSync(markdownPath, "utf8");
 
-    var output = template.index({
-        html: md.render(markdownSource)
-    });
+    var configPath = [rootDir, articleDir, "config.json"].join(path.sep);
+    var config = {};
+
+    try {
+        config = JSON.parse(fs.readFileSync(configPath, "utf8"));
+    } catch (err) {
+        console.error(err);
+    }
+
+    var templateData = {
+        html: md.render(markdownSource),
+        title: config.title || "TODO - Add Title",
+        type: config.type || "article",
+        description: config.description || "TODO - Add Description",
+        images: config.images || ["TODO"]
+    };
+
+    var output = template.index(templateData);
 
     console.log(output);
 });
