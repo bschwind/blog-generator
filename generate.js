@@ -12,11 +12,11 @@ var md = require("markdown-it")({
     highlight: function (str, lang) {
         if (lang && hljs.getLanguage(lang)) {
             try {
-                return hljs.highlight(lang, str).value;
+                return "<pre class=\"hljs\"><code>" + hljs.highlight(lang, str, true).value + "</code></pre>";
             } catch (err) {}
         }
 
-        return ""; // use external default escaping
+        return "<pre class=\"hljs\"><code>" + str + "</code></pre>"; // use external default escaping
     }
 });
 
@@ -37,6 +37,9 @@ articleDirs.forEach(function (articleDir) {
     var markdownPath = [rootDir, articleDir, "article.txt"].join(path.sep);
     var markdownSource = fs.readFileSync(markdownPath, "utf8");
 
+    var codeThemePath = ["codeThemes", "monokai-sublime.css"].join(path.sep);
+    var codeThemeSource = fs.readFileSync(codeThemePath, "utf8");
+
     var configPath = [rootDir, articleDir, "config.json"].join(path.sep);
     var config = {};
 
@@ -51,7 +54,8 @@ articleDirs.forEach(function (articleDir) {
         title: config.title || "TODO - Add Title",
         type: config.type || "article",
         description: config.description || "TODO - Add Description",
-        images: config.images || ["TODO"]
+        images: config.images || ["TODO"],
+        code_theme: codeThemeSource
     };
 
     var output = template.index(templateData);
