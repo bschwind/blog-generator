@@ -1,9 +1,10 @@
 "use strict";
 
-var fs = require("fs");
+var fs = require("fs-extra");
 var hljs = require("highlight.js");
 var path = require("path");
 var template = require("./templates/template");
+var util = require("util");
 var md = require("markdown-it")({
     html: true,
     linkify: true,
@@ -20,7 +21,29 @@ var md = require("markdown-it")({
     }
 });
 
-var rootDir = "articles";
+md.renderer.rules.image = function (tokens, idx, options, env, self) {
+    var imageProps = tokens[0];
+
+    if (!imageProps) {
+        return "IMAGE ERROR";
+    }
+
+    var imageSource;
+
+    imageProps.attrs.forEach(function (attr) {
+        if (attr[0] === "src") {
+            imageSource = attr[1];
+        }
+    });
+
+    var content = imageProps.content;
+
+    // TODO - use resized URL and link to full size
+
+    return util.format("<p><div class=\"image-container\"><a href=\"%s\" target=\"_blank\"><img src=\"%s\" alt=\"%s\"></a><p>%s</p></div></p>", imageSource, imageSource, content, content);
+};
+
+var rootDir = __dirname + path.sep + "articles";
 var articleDirs = fs.readdirSync(rootDir);
 
 // YYYYMMDD
@@ -30,17 +53,30 @@ articleDirs = articleDirs.filter(function (articleDir) {
     return migrationRegex.test(articleDir);
 });
 
+// Remove the output directory
+var outDir = [__dirname, "out"].join(path.sep);
+try {
+    fs.emptyDirSync(outDir);
+    fs.rmdirSync(outDir);
+} catch (err) {
+    console.error(err);
+    // Who cares?
+}
+
+fs.mkdirSync(outDir);
+
 // Sort the articles by date
 articleDirs.sort();
 
 articleDirs.forEach(function (articleDir) {
-    var markdownPath = [rootDir, articleDir, "article.txt"].join(path.sep);
+    var inputDir = [rootDir, articleDir].join(path.sep);
+    var markdownPath = [inputDir, "article.txt"].join(path.sep);
     var markdownSource = fs.readFileSync(markdownPath, "utf8");
 
-    var codeThemePath = ["codeThemes", "monokai-sublime.css"].join(path.sep);
+    var codeThemePath = [__dirname, "codeThemes", "monokai-sublime.css"].join(path.sep);
     var codeThemeSource = fs.readFileSync(codeThemePath, "utf8");
 
-    var configPath = [rootDir, articleDir, "config.json"].join(path.sep);
+    var configPath = [inputDir, "config.json"].join(path.sep);
     var config = {};
 
     try {
@@ -60,6 +96,16 @@ articleDirs.forEach(function (articleDir) {
 
     var output = template.index(templateData);
 
-    console.log(output);
+    var articleOutputDir = [outDir, articleDir].join(path.sep);
+    var outputPath = [outDir, articleDir, "index.html"].join(path.sep);
+    fs.mkdirSync(articleOutputDir);
+    fs.writeFileSync(outputPath, output);
+
+    fs.copySync(inputDir, articleOutputDir);
+
+    var markdownOutput = [articleOutputDir, "article.txt"].join(path.sep);
+    var configOutput = [articleOutputDir, "config.json"].join(path.sep);
+    fs.unlinkSync(markdownOutput);
+    fs.unlinkSync(configOutput);
 });
 
