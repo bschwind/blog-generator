@@ -28,19 +28,20 @@ md.renderer.rules.image = function (tokens, idx, options, env, self) {
         return "IMAGE ERROR";
     }
 
-    var imageSource;
+    var resizedSource;
 
     imageProps.attrs.forEach(function (attr) {
         if (attr[0] === "src") {
-            imageSource = attr[1];
+            resizedSource = attr[1];
         }
     });
 
     var content = imageProps.content;
+    var fullSizedSource = resizedSource.replace("resized/", "");
 
     // TODO - use resized URL and link to full size
 
-    return util.format("<p><div class=\"image-container\"><a href=\"%s\" target=\"_blank\"><img src=\"%s\" alt=\"%s\"></a><p>%s</p></div></p>", imageSource, imageSource, content, content);
+    return util.format("<p><div class=\"image-container\"><a href=\"%s\" target=\"_blank\"><img src=\"%s\" alt=\"%s\"></a><p>%s</p></div></p>", fullSizedSource, resizedSource, content, content);
 };
 
 var rootDir = __dirname + path.sep + "articles";
