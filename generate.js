@@ -44,10 +44,26 @@ md.renderer.rules.image = function (tokens, idx, options, env, self) {
     return util.format("<p><div class=\"image-container\"><a href=\"%s\" target=\"_blank\"><img src=\"%s\" alt=\"%s\"></a><p>%s</p></div></p>", fullSizedSource, resizedSource, content, content);
 };
 
+var numberToMonth = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec"
+]
+
 var rootDir = __dirname + path.sep + "articles";
 var articleDirs = fs.readdirSync(rootDir);
 
-// YYYYMMDD
+// At least YYYYMMDD, you can add numbers at the end for multiple
+// posts in one day and order them
 var migrationRegex = /\d{8}/;
 
 articleDirs = articleDirs.filter(function (articleDir) {
@@ -65,6 +81,8 @@ try {
 }
 
 fs.mkdirSync(outDir);
+
+var articleLinks = [];
 
 // Sort the articles by date
 articleDirs.sort();
@@ -95,11 +113,17 @@ articleDirs.forEach(function (articleDir) {
         code_theme: codeThemeSource
     };
 
+    // Date numbers for directory structure
+    var year = articleDir.substring(0, 4);
+    var month = articleDir.substr(4, 2);
+    var day = articleDir.substr(6, 2);
+
     var output = template.index(templateData);
 
-    var articleOutputDir = [outDir, articleDir].join(path.sep);
-    var outputPath = [outDir, articleDir, "index.html"].join(path.sep);
-    fs.mkdirSync(articleOutputDir);
+    var relativeOutputDir = [year, month, day, config.url_title].join(path.sep);
+    var articleOutputDir = [outDir, relativeOutputDir].join(path.sep);
+    var outputPath = [articleOutputDir, "index.html"].join(path.sep);
+    fs.mkdirsSync(articleOutputDir);
     fs.writeFileSync(outputPath, output);
 
     fs.copySync(inputDir, articleOutputDir);
@@ -108,5 +132,27 @@ articleDirs.forEach(function (articleDir) {
     var configOutput = [articleOutputDir, "config.json"].join(path.sep);
     fs.unlinkSync(markdownOutput);
     fs.unlinkSync(configOutput);
+
+
+    articleLinks.push({
+        date_string: year + " " + numberToMonth[Number(month)-1] + " " + day,
+        title: config.title,
+        path: "/" + relativeOutputDir + "/"
+    });
 });
 
+// Newest posts at the top, oldest at the bottom
+articleLinks.reverse();
+
+var homepageHTML = articleLinks.map(function (link) {
+    return util.format("<p><span class=\"date\">%s - </span><a href=\"%s\">%s</a></p>", link.date_string, link.path, link.title);
+})
+.join("\n") + "\n";
+
+var homepageData = {
+    html: homepageHTML
+};
+
+var homepageOutPath = [outDir, "index.html"].join(path.sep);
+
+fs.writeFileSync(homepageOutPath, template.homepage(homepageData));

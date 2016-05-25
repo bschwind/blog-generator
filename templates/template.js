@@ -14,5 +14,6 @@ function loadTemplate(fileName) {
 }
 
 templates.index = loadTemplate("index.html");
+templates.homepage = loadTemplate("homepage.html");
 
 module.exports = templates;
