@@ -10,34 +10,60 @@
 	<meta property="og:description" content="TODO"/>
 	<meta property="og:image" content="TODO"/>
 
+	<link href='https://fonts.googleapis.com/css?family=Arvo' rel='stylesheet' type='text/css'>
+
 	<style type="text/css">
 		body {
-			margin: 40px auto;
-			max-width: 700px;
-			line-height: 1.6;
-			font-size: 20px;
-			color: #444;
-			padding: 0 10px;
-			tab-size: 4;
+			margin: 0;
 		}
 
-		h1 {
+		h1,h2,h3,h4,h5 {
 			line-height: 1.2;
-			text-align: center;
+			font-family: "Helvetica Neue", "Open Sans", Arial, Helvetica, sans-serif;
+		}
+
+		header {
+			background-color: #FF5722;
+			padding: 15px;
+		}
+
+		.head-container {
+			max-width: 700px;
+			margin: 0px auto;
+		}
+
+		.head-container h1 {
+			color: white;
+			margin: 0;
+			font-family: "Arvo", sans-serif;
 		}
 
 		a {
 			text-decoration: none;
 		}
 
+		p {
+			font-family: sans-serif;
+		}
+
+		.post {
+			margin: 40px auto;
+			max-width: 700px;
+			line-height: 1.6;
+			color: #444;
+			padding: 0 15px;
+			font-size: 20px;
+		}
+
 		.date {
 			font-weight: 700;
-			font-family: monospace;
 		}
 	</style>
 </head>
 <body>
-<h1>Brian Schwind</h1>
+<header><div class="head-container"><a href="/"><h1>Brian Schwind</h1></a></div></header>
+<div class="post">
 {{=it.html}}
+</div>
 </body>
 </html>
