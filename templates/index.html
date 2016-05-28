@@ -15,18 +15,16 @@
 	<style type="text/css">
 	{{=it.code_theme}}
 	</style>
+
+	<!-- Used for h1, h2, etc -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,700" rel="stylesheet" type="text/css">
+
+	<!-- Used for page header -->
+	<link href='https://fonts.googleapis.com/css?family=Arvo' rel='stylesheet' type='text/css'>
+
 	<style type="text/css">
 		body {
-			margin: 40px auto;
-			max-width: 700px;
-			line-height: 1.6;
-			color: #444;
-			padding: 0 10px;
-			tab-size: 4;
-			font-family: Georgia, Cambria, "Times New Roman", Times, "Lora", serif;
-			font-weight: 400;
-			font-size: 20px;
+			margin: 0;
 		}
 
 		pre {
@@ -41,6 +39,22 @@
 			font-family: "Helvetica Neue", "Open Sans", Arial, Helvetica, sans-serif;
 		}
 
+		header {
+			background-color: #FF5722;
+			padding: 15px;
+		}
+
+		header > .head-container {
+			color: white;
+			max-width: 700px;
+			margin: 0px auto;
+		}
+
+		.head-container > h1 {
+			margin: 0;
+			font-family: "Arvo", sans-serif;
+		}
+
 		blockquote > p {
 			border-left: 5px solid #9E9E9E;
 			padding-left: 10px;
@@ -48,6 +62,19 @@
 
 		a {
 			text-decoration: none;
+		}
+
+		.post {
+			margin: 40px auto;
+			max-width: 700px;
+			line-height: 1.6;
+			color: #444;
+			padding: 0 10px;
+			tab-size: 4;
+			font-family: Georgia, Cambria, "Times New Roman", Times, "Lora", serif;
+			font-weight: 400;
+			font-size: 20px;
+			margin-top: 0;
 		}
 
 		.image-container {
@@ -69,6 +96,9 @@
 	</style>
 </head>
 <body>
+<header><div class="head-container"><h1>Brian Schwind</h1></div></header>
+<div class="post">
 {{=it.html}}
+</div>
 </body>
 </html>
