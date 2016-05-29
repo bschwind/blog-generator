@@ -39,8 +39,6 @@ md.renderer.rules.image = function (tokens, idx, options, env, self) {
     var content = imageProps.content;
     var fullSizedSource = resizedSource.replace("resized/", "");
 
-    // TODO - use resized URL and link to full size
-
     return util.format("<p><div class=\"image-container\"><a href=\"%s\" target=\"_blank\"><img src=\"%s\" alt=\"%s\"></a><p>%s</p></div></p>", fullSizedSource, resizedSource, content, content);
 };
 
