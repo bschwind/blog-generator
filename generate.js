@@ -155,4 +155,10 @@ var homepageData = {
 
 var homepageOutPath = [outDir, "index.html"].join(path.sep);
 
+var openGraphImagePath = [__dirname, "openGraph.png"].join(path.sep);
+var homepageImagesOutPath = [outDir, "images"].join(path.sep);
+var openGraphImageOut = [homepageImagesOutPath, "openGraph.png"].join(path.sep);
+
 fs.writeFileSync(homepageOutPath, template.homepage(homepageData));
+fs.mkdirsSync(homepageImagesOutPath);
+fs.copySync(openGraphImagePath, openGraphImageOut);
