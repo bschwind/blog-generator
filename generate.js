@@ -98,6 +98,11 @@ articleDirs.forEach(function (articleDir) {
     var configPath = [inputDir, "config.json"].join(path.sep);
     var config = {};
 
+    // Date numbers for directory structure
+    var year = articleDir.substring(0, 4);
+    var month = articleDir.substr(4, 2);
+    var day = articleDir.substr(6, 2);
+
     try {
         config = JSON.parse(fs.readFileSync(configPath, "utf8"));
     } catch (err) {
@@ -110,13 +115,9 @@ articleDirs.forEach(function (articleDir) {
         type: config.type || "article",
         description: config.description || "TODO - Add Description",
         images: config.images || ["TODO"],
-        code_theme: codeThemeSource
+        code_theme: codeThemeSource,
+        url: "https://blog.bschwind.com/" + [year, month, day, config.url_title].join(path.sep) + "/"
     };
-
-    // Date numbers for directory structure
-    var year = articleDir.substring(0, 4);
-    var month = articleDir.substr(4, 2);
-    var day = articleDir.substr(6, 2);
 
     var output = template.index(templateData);
 
