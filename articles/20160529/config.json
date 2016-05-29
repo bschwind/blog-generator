@@ -1,0 +1,8 @@
+{
+	"title": "Sending Infrared Commands From a Raspberry Pi Without LIRC",
+	"url_title": "sending-infrared-commands-from-a-raspberry-pi-without-lirc",
+	"description": "Build an infrared transmitter, starting with a Raspberry Pi and basic electronic components",
+	"author": "Brian Schwind",
+	"type": "article",
+	"images": ["https://blog.bschwind.com/2016/05/29/sending-infrared-commands-from-a-raspberry-pi-without-lirc/images/completedCircuit.jpg"]
+}
