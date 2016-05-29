@@ -25,6 +25,7 @@
 	<style type="text/css">
 		body {
 			margin: 0;
+			background-color: #F6F6F6;
 		}
 
 		pre {
@@ -53,6 +54,28 @@
 			color: white;
 			margin: 0;
 			font-family: "Arvo", sans-serif;
+		}
+
+		footer {
+			background-color: #004A55;
+			padding: 15px;
+		}
+
+		.foot1 {
+			background-color: #A7CDCC;
+			height: 38px;
+		}
+
+		.foot-container {
+			max-width: 700px;
+			margin: 0px auto;
+			padding-top: 10px;
+			height: 20px;
+		}
+
+		.foot-container p {
+			color: white;
+			margin: 0;
 		}
 
 		blockquote > p {
@@ -100,5 +123,11 @@
 <div class="post">
 {{=it.html}}
 </div>
+<div class="foot1"></div>
+<footer>
+	<div class="foot-container">
+		<p>© 2016 Brian Schwind.<p>
+	</div>
+</footer>
 </body>
 </html>
