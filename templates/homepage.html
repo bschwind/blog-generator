@@ -13,8 +13,15 @@
 	<link href='https://fonts.googleapis.com/css?family=Arvo' rel='stylesheet' type='text/css'>
 
 	<style type="text/css">
+		html {
+			position: relative;
+			min-height: 100%;
+			background-color: #F6F6F6;
+		}
+
 		body {
 			margin: 0;
+			height: 100%;
 		}
 
 		h1,h2,h3,h4,h5 {
@@ -36,6 +43,33 @@
 			color: white;
 			margin: 0;
 			font-family: "Arvo", sans-serif;
+		}
+
+		footer {
+			background-color: #004A55;
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			height: 100px;
+			width: 100%;
+		}
+
+		.foot-stripe {
+			background-color: #A7CDCC;
+			height: 38px;
+		}
+
+		.foot-container {
+			max-width: 700px;
+			margin: 0px auto;
+			padding-top: 25px;
+			padding-left: 15px;
+			height: 20px;
+		}
+
+		.foot-container p {
+			color: white;
+			margin: 0;
 		}
 
 		a {
@@ -65,5 +99,11 @@
 <div class="post">
 {{=it.html}}
 </div>
+<footer>
+	<div class="foot-stripe"></div>
+	<div class="foot-container">
+		<p>© 2016 Brian Schwind.<p>
+	</div>
+</footer>
 </body>
 </html>

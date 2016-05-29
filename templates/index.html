@@ -23,9 +23,15 @@
 	<link href='https://fonts.googleapis.com/css?family=Arvo' rel='stylesheet' type='text/css'>
 
 	<style type="text/css">
+		html {
+			position: relative;
+			min-height: 100%;
+			background-color: #F6F6F6;
+		}
+
 		body {
 			margin: 0;
-			background-color: #F6F6F6;
+			height: 100%;
 		}
 
 		pre {
@@ -58,10 +64,14 @@
 
 		footer {
 			background-color: #004A55;
-			padding: 15px;
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			height: 100px;
+			width: 100%;
 		}
 
-		.foot1 {
+		.foot-stripe {
 			background-color: #A7CDCC;
 			height: 38px;
 		}
@@ -69,7 +79,8 @@
 		.foot-container {
 			max-width: 700px;
 			margin: 0px auto;
-			padding-top: 10px;
+			padding-top: 25px;
+			padding-left: 15px;
 			height: 20px;
 		}
 
@@ -90,6 +101,7 @@
 		.post {
 			margin: 40px auto;
 			max-width: 700px;
+			min-height: 100vh;
 			line-height: 1.6;
 			color: #444;
 			padding: 0 15px;
@@ -98,11 +110,11 @@
 			font-weight: 400;
 			font-size: 18px;
 			margin-top: 0;
+			margin-bottom: 150px;
 		}
 
 		.image-container {
 			max-width: 700px;
-
 		}
 
 		.image-container > a > img {
@@ -123,8 +135,8 @@
 <div class="post">
 {{=it.html}}
 </div>
-<div class="foot1"></div>
 <footer>
+	<div class="foot-stripe"></div>
 	<div class="foot-container">
 		<p>© 2016 Brian Schwind.<p>
 	</div>
