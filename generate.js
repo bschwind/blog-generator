@@ -114,7 +114,8 @@ articleDirs.forEach(function (articleDir) {
         description: config.description || "TODO - Add Description",
         images: config.images || ["TODO"],
         code_theme: codeThemeSource,
-        url: "https://blog.bschwind.com/" + [year, month, day, config.url_title].join(path.sep) + "/"
+        url: "https://blog.bschwind.com/" + [year, month, day, config.url_title].join(path.sep) + "/",
+        url_title: config.url_title
     };
 
     var output = template.index(templateData);
