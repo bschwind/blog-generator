@@ -11,13 +11,30 @@ var md = require("markdown-it")({
     breaks: true,
 
     highlight: function (str, lang) {
-        if (lang && hljs.getLanguage(lang)) {
+        var defaultText = "<pre class=\"hljs\"><code>" + str + "</code></pre>"; // use external default escaping
+
+        if (lang) {
+            var items = lang.split(",");
+            var lang = items[0];
+            var fileName = items[1];
+
+            var codeBlock = "";
             try {
-                return "<pre class=\"hljs\"><code>" + hljs.highlight(lang, str, true).value + "</code></pre>";
-            } catch (err) {}
+                codeBlock = "<pre class=\"hljs\"><code>" + hljs.highlight(lang, str, true).value + "</code></pre>";
+            } catch(err) {
+                console.log("Error highlighting text:");
+                console.log(err);
+                codeBlock = defaultText;
+            }
+
+            if (fileName) {
+                return "<div class=\"filename-container\"><p>" + fileName + "</p></div>\n" + codeBlock;
+            } else {
+                return codeBlock;
+            }
         }
 
-        return "<pre class=\"hljs\"><code>" + str + "</code></pre>"; // use external default escaping
+        return defaultText;
     }
 });
 
