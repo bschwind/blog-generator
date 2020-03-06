@@ -74,7 +74,7 @@ After the first 9 millisecond pulse, we should see a 4.5 millisecond gap, and th
 
 Here's the Python script to identify these pulses and print them out. I did my best to explain what's going on in the comments.
 
-```python
+```python,main.py
 import RPi.GPIO as GPIO
 import math
 import os
@@ -350,7 +350,7 @@ pigpio offers a ton of functionality, but I was only interested in generating wa
 
 I'm not going to go into too much detail with the C library. It's a header-only library, so just include it in your own program and pass a few linker flags to the compiler. Those flags are documented in the README. Instead of making one executable that takes in a billion parameters, I settled on making an executable per infrared device I have, and hard coding the pulse parameters in the code itself. For example, this is the entire source code for the ceiling light program:
 
-```c
+```c,main.c
 #include <stdio.h>
 #include "irslinger.h"
 
@@ -494,7 +494,7 @@ Constructing the signal in code
 
 Ignoring the on/off timer part of the signal, you can construct the full signal with this code (JavaScript):
 
-```javascript
+```javascript,constructSignal.js
 function getIRCodeFromState(state) {
 	var code = "1000000000001000000000000000001011111101111111110000000000110011110011000100100110110110";
 
