@@ -104,7 +104,7 @@ articleDirs.sort();
 
 articleDirs.forEach(function (articleDir) {
     var inputDir = [rootDir, articleDir].join(path.sep);
-    var markdownPath = [inputDir, "article.txt"].join(path.sep);
+    var markdownPath = [inputDir, "article.md"].join(path.sep);
     var markdownSource = fs.readFileSync(markdownPath, "utf8");
 
     var codeThemePath = [__dirname, "codeThemes", "monokai-sublime.css"].join(path.sep);
@@ -145,7 +145,7 @@ articleDirs.forEach(function (articleDir) {
 
     fs.copySync(inputDir, articleOutputDir);
 
-    var markdownOutput = [articleOutputDir, "article.txt"].join(path.sep);
+    var markdownOutput = [articleOutputDir, "article.md"].join(path.sep);
     var configOutput = [articleOutputDir, "config.json"].join(path.sep);
     fs.unlinkSync(markdownOutput);
     fs.unlinkSync(configOutput);
