@@ -338,7 +338,7 @@ A better way to send IR signals (pigpio)
 ----------------------------------------
 
 
-With that high level understanding of LIRC, I did some searching and came across a library called [pigpio](http://abyz.co.uk/rpi/pigpio/index.html). What caught my eye was this sentence on the feature list:
+With that high level understanding of LIRC, I did some searching and came across a library called [pigpio](https://github.com/joan2937/pigpio). What caught my eye was this sentence on the feature list:
 
 > the construction of arbitrary waveforms to give precise timing of output GPIO level changes (accurate to **a few microseconds**).
 
