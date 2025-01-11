@@ -112,7 +112,7 @@ From the original iPhone SE to the iPhone 16, it's an impressive jump in hardwar
 
 ![](images/resized/slack_update.png)
 
-![](images/resized/analog_website.png)
+![Wow, such an advanced website needs the latest OS to function](images/resized/analog_website.png)
 
 Apple supported the hardware with iOS for a pretty impressive amount of time. Of course I would have hoped for an OS which continues to get faster over time, and thus run fine on older hardware. Sadly, this never seems to be the case for this world, as if it's some sort of law that software _must_ get slower over time.
 
